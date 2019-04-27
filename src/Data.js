@@ -27,7 +27,7 @@ let initialItems = [
       id: "abcde",
       description: "Thruxton R - new model, retro styling",
       price: 10000,
-      image: "./moto.jpg",
+      image: "/moto.jpg",
       sellerId: "triumph",
       remaining: 3,
       reviews: [
@@ -39,7 +39,7 @@ let initialItems = [
       id: "abcdf",
       description: "Street Triple R",
       price: 6000,
-      image: "./moto2.jpg",
+      image: "/moto2.jpg",
       sellerId: "triumph",
       remaining: 5,
       reviews: [
@@ -51,7 +51,7 @@ let initialItems = [
       id: "abcdg",
       description: "Scrambler 1200 xe",
       price: 12000,
-      image: "./moto3.jpg",
+      image: "/moto3.jpg",
       sellerId: "triumph",
       remaining: 15,
       reviews: [

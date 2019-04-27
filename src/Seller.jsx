@@ -17,15 +17,18 @@ export default class Seller extends Component {
          }
       })
 
-      console.log(itemsToDisplay[0].description)
+      this.props.addedItems.forEach(item => {
+
+         if (item.sellerId === this.props.sellerId) {
+            itemsToDisplay.push(item)
+         }
+      })
 
       return itemsToDisplay.map(item => {
-
          return (
             <li>
                <Link to={"/details/" + item.id}>{item.description}</Link>
             </li>
-
          )
       })
    }

@@ -34,6 +34,7 @@ export default class App extends Component {
                <Route exact={true} path='/reviewer/:rid' render={this.renderReviewer} />
                <Route exact={true} path="/sellers" render={this.renderSellersList} />
                <Route exact={true} path="/allSellers" render={this.renderAllSellers} />
+               <Link className="center" to={"/"}>Return to Marketplace</Link>
             </div>
          </BrowserRouter>
       );
@@ -101,45 +102,48 @@ export default class App extends Component {
       return (
          <div>
             <h2 className="center">Marketplace!</h2>
-            <form className="center" onSubmit={this.onSubmitHandler}>
-               <input
-                  type="input"
-                  placeholder="Description"
-                  onChange={this.onDescChange}
-                  value={this.state.descInput}>
-               </input>
-               <input
-                  type="input"
-                  placeholder="Price"
-                  onChange={this.onPriceChange}
-                  value={this.state.priceInput}>
-               </input>
-               <input
-                  type="input"
-                  placeholder="Image URL"
-                  onChange={this.onImageChange}
-                  value={this.state.imageInput}>
-               </input>
-               <input
-                  type="input"
-                  placeholder="ItemID"
-                  onChange={this.onItemIDChange}
-                  value={this.state.itemIDInput}>
-               </input>
-               <input
-                  type="input"
-                  placeholder="SellerID"
-                  onChange={this.onSellerIDChange}
-                  value={this.state.sellerIDInput}>
-               </input>
-               <input
-                  type="input"
-                  placeholder="Remaining"
-                  onChange={this.onRemaniningChange}
-                  value={this.state.remainingInput}>
-               </input>
-               <input type="submit" value="Add item"></input>
-            </form>
+            <div className="center">
+               Add an item to the Marketplace!
+               <form onSubmit={this.onSubmitHandler}>
+                  <input
+                     type="input"
+                     placeholder="Description"
+                     onChange={this.onDescChange}
+                     value={this.state.descInput}>
+                  </input>
+                  <input
+                     type="input"
+                     placeholder="Price"
+                     onChange={this.onPriceChange}
+                     value={this.state.priceInput}>
+                  </input>
+                  <input
+                     type="input"
+                     placeholder="Image URL"
+                     onChange={this.onImageChange}
+                     value={this.state.imageInput}>
+                  </input>
+                  <input
+                     type="input"
+                     placeholder="ItemID"
+                     onChange={this.onItemIDChange}
+                     value={this.state.itemIDInput}>
+                  </input>
+                  <input
+                     type="input"
+                     placeholder="SellerID"
+                     onChange={this.onSellerIDChange}
+                     value={this.state.sellerIDInput}>
+                  </input>
+                  <input
+                     type="input"
+                     placeholder="Remaining"
+                     onChange={this.onRemaniningChange}
+                     value={this.state.remainingInput}>
+                  </input>
+                  <input type="submit" value="Add item"></input>
+               </form>
+            </div>
 
             {initialItems.map(item =>
                (<Item
@@ -179,19 +183,34 @@ export default class App extends Component {
          initialSellers.filter(seller => { return seller.id === sellerId })
       return (
          <div>
-            <Seller seller={candidates[0]} sellerId={sellerId} />
-            <Link to={"/"}>Return to Marketplace</Link>
+            <Seller seller={candidates[0]} sellerId={sellerId} addedItems={this.state.items} />
          </div>
       )
    }
 
    renderDetails = routerData => {
       let itemId = routerData.match.params.itemid
+
+      let addedIds = this.state.items.map(item => {
+         return item.id
+      })
+      // console.log(addedIds)
+
+      if (addedIds.includes(itemId)) {
+
+         let item = this.state.items.filter(item => { return item.id === itemId })
+         return (
+            <div>
+               <Details item={item[0]} />
+            </div>
+         )
+
+      }
+
       let item = initialItems.filter(item => { return item.id === itemId })
       return (
          <div>
             <Details item={item[0]} />
-            <Link to={"/"}>Return to Marketplace</Link>
          </div>
       )
    }
@@ -217,7 +236,6 @@ export default class App extends Component {
                   return (<Review item={review[1]} rating={review[0].rating} comment={review[0].comment} reviewer={review[0].reviewer} showLink={false} />)
                })}
             </ul>
-            <Link to={"/"}>Return to Marketplace</Link>
          </div>
       )
    }
@@ -230,7 +248,6 @@ export default class App extends Component {
             {initialSellers.map(seller => {
                return <Seller seller={seller} sellerId={seller.id} />
             })}
-            <Link to={"/"}>Return to Marketplace</Link>
          </div>
       )
    }
@@ -244,7 +261,6 @@ export default class App extends Component {
                return (
                   <div>
                      <Link to={"/seller/" + seller.id}>{seller.name}</Link>
-                     <Link to={"/"}>Return to Marketplace</Link>
                   </div>
                )
             })}
