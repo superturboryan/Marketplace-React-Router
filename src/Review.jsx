@@ -19,7 +19,7 @@ export default class Review extends Component {
             <li>
                <h4>{this.props.item.description}</h4>
                <div>{this.props.rating}/5☆</div>
-               <div>"{this.props.comment}" - written by {this.props.reviewer}</div>
+               <div>"{this.props.comment}"</div>
             </li>
          )
       }

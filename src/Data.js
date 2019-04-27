@@ -25,7 +25,7 @@ let initialItems = [
    },
    {
       id: "abcde",
-      description: "Triumph Thruxton R - new model, retro styling",
+      description: "Thruxton R - new model, retro styling",
       price: 10000,
       image: "./moto.jpg",
       sellerId: "triumph",
@@ -37,7 +37,7 @@ let initialItems = [
    },
    {
       id: "abcdf",
-      description: "Triumph Street Triple R",
+      description: "Street Triple R",
       price: 6000,
       image: "./moto2.jpg",
       sellerId: "triumph",
@@ -49,7 +49,7 @@ let initialItems = [
    },
    {
       id: "abcdg",
-      description: "Triumph Scrambler 1200 xe",
+      description: "Scrambler 1200 xe",
       price: 12000,
       image: "./moto3.jpg",
       sellerId: "triumph",
@@ -71,7 +71,7 @@ let initialSellers = [{
    rating: "2 stars",
 }, {
    id: "triumph",
-   name: "Rich McGee",
+   name: "Triumph Motorcycles",
    rating: "4.5 stars"
 }]
 
