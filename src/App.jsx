@@ -39,6 +39,62 @@ export default class App extends Component {
       );
    }
 
+   //EVENT HANDLERS
+
+   onSubmitHandler = event => {
+
+      event.preventDefault()
+
+      this.setState({
+         descInput: "",
+         priceInput: "",
+         imageInput: "",
+         itemIDInput: "",
+         sellerIDInput: "",
+         remainingInput: "",
+         items: this.state.items.concat({
+            description: this.state.descInput,
+            price: this.state.priceInput,
+            image: this.state.imageInput,
+            id: this.state.itemIDInput,
+            sellerId: this.state.sellerIDInput,
+            remaining: this.state.remainingInput,
+            reviews: []
+         })
+      })
+
+   }
+
+   onDescChange = event => {
+      console.log("Updating the description to ", event.target.value)
+      this.setState({ descInput: event.target.value })
+   }
+
+   onPriceChange = event => {
+      console.log("Updating the price to ", event.target.value)
+      this.setState({ priceInput: event.target.value })
+   }
+
+   onImageChange = event => {
+      console.log("Updating the image URL to ", event.target.value)
+      this.setState({ imageInput: event.target.value })
+   }
+
+   onItemIDChange = event => {
+      console.log("Updating the item ID to ", event.target.value)
+      this.setState({ itemIDInput: event.target.value })
+   }
+
+   onSellerIDChange = event => {
+      console.log("Updating the seller ID to ", event.target.value)
+      this.setState({ sellerIDInput: event.target.value })
+   }
+
+   onRemaniningChange = event => {
+      console.log("Updating the remaining count to ", event.target.value)
+      this.setState({ remainingInput: event.target.value })
+   }
+
    //Render methods for all the Routes
 
    renderAllItems = () => {
@@ -82,11 +138,20 @@ export default class App extends Component {
                   onChange={this.onRemaniningChange}
                   value={this.state.remainingInput}>
                </input>
-
                <input type="submit" value="Add item"></input>
             </form>
 
             {initialItems.map(item =>
+               (<Item
+                  cost={item.price}
+                  sellerId={item.sellerId}
+                  imageLocation={item.image}
+                  description={item.description}
+                  remaining={item.remaining}
+                  id={item.id}
+               />))}
+
+            {this.state.items.map(item =>
                (<Item
                   cost={item.price}
                   sellerId={item.sellerId}
@@ -106,59 +171,6 @@ export default class App extends Component {
 
          </div>
       )
-   }
-
-   onSubmitHandler = event => {
-
-      event.preventDefault()
-
-      this.setState({
-         descInput: "",
-         priceInput: "",
-         imageInput: "",
-         itemIDInput: "",
-         sellerIDInput: "",
-         remainingInput: "",
-         items: this.state.items.concat({
-            description: this.state.descInput,
-            price: this.state.priceInput,
-            id: this.state.itemIDInput,
-            sellerId: this.state.sellerIDInput,
-            remaining: this.state.remainingInput,
-            reviews: []
-         })
-      })
-
-   }
-
-   onDescChange = event => {
-      console.log("Updating the description to ", event.target.value)
-      this.setState({ descInput: event.target.value })
-   }
-
-   onPriceChange = event => {
-      console.log("Updating the price to ", event.target.value)
-      this.setState({ priceInput: event.target.value })
-   }
-
-   onImageChange = event => {
-      console.log("Updating the image URL to ", event.target.value)
-      this.setState({ imageInput: event.target.value })
-   }
-
-   onItemIDChange = event => {
-      console.log("Updating the item ID to ", event.target.value)
-      this.setState({ itemIDInput: event.target.value })
-   }
-
-   onSellerIDChange = event => {
-      console.log("Updating the seller ID to ", event.target.value)
-      this.setState({ sellerIDInput: event.target.value })
-   }
-
-   onRemaniningChange = event => {
-      console.log("Updating the remaining count to ", event.target.value)
-      this.setState({ remainingInput: event.target.value })
    }
 
    renderSeller = routerData => {
