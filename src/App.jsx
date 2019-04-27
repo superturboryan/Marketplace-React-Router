@@ -69,9 +69,12 @@ let renderAllSellers = () => {
 
 
    return (
-      initialSellers.map(seller => {
-         return <Seller seller={seller} sellerId={seller.id} />
-      })
+      <div>
+         <h2>Sellers</h2>
+         {initialSellers.map(seller => {
+            return <Seller seller={seller} sellerId={seller.id} />
+         })}
+      </div>
    )
 }
 
