@@ -17,6 +17,7 @@ export default class App extends Component {
          items: [],
          descInput: "",
          priceInput: "",
+         imageInput: "",
          itemIDInput: "",
          sellerIDInput: "",
          remainingInput: ""
@@ -44,31 +45,42 @@ export default class App extends Component {
       return (
          <div>
             <h2 className="center">Marketplace!</h2>
-            <form className="center" onSubmit={this.submitHandler}>
+            <form className="center" onSubmit={this.onSubmitHandler}>
                <input
                   type="input"
                   placeholder="Description"
-                  onChange={this.onDescChange}>
+                  onChange={this.onDescChange}
+                  value={this.state.descInput}>
                </input>
                <input
                   type="input"
                   placeholder="Price"
-                  onChange={this.onPriceChange}>
+                  onChange={this.onPriceChange}
+                  value={this.state.priceInput}>
+               </input>
+               <input
+                  type="input"
+                  placeholder="Image URL"
+                  onChange={this.onImageChange}
+                  value={this.state.imageInput}>
                </input>
                <input
                   type="input"
                   placeholder="ItemID"
-                  onChange={this.onItemIDChange}>
+                  onChange={this.onItemIDChange}
+                  value={this.state.itemIDInput}>
                </input>
                <input
                   type="input"
                   placeholder="SellerID"
-                  onChange={this.onSellerIDChange}>
+                  onChange={this.onSellerIDChange}
+                  value={this.state.sellerIDInput}>
                </input>
                <input
                   type="input"
                   placeholder="Remaining"
-                  onChange={this.onRemaniningChange}>
+                  onChange={this.onRemaniningChange}
+                  value={this.state.remainingInput}>
                </input>
 
                <input type="submit" value="Add item"></input>
@@ -96,9 +108,26 @@ export default class App extends Component {
       )
    }
 
-   submitHandler = event => {
+   onSubmitHandler = event => {
 
       event.preventDefault()
+
+      this.setState({
+         descInput: "",
+         priceInput: "",
+         imageInput: "",
+         itemIDInput: "",
+         sellerIDInput: "",
+         remainingInput: "",
+         items: this.state.items.concat({
+            description: this.state.descInput,
+            price: this.state.priceInput,
+            id: this.state.itemIDInput,
+            sellerId: this.state.sellerIDInput,
+            remaining: this.state.remainingInput,
+            reviews: []
+         })
+      })
 
    }
 
@@ -110,6 +139,11 @@ export default class App extends Component {
    onPriceChange = event => {
       console.log("Updating the price to ", event.target.value)
       this.setState({ priceInput: event.target.value })
+   }
+
+   onImageChange = event => {
+      console.log("Updating the image URL to ", event.target.value)
+      this.setState({ imageInput: event.target.value })
    }
 
    onItemIDChange = event => {
