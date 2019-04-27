@@ -20,7 +20,12 @@ export default class App extends Component {
          imageInput: "",
          itemIDInput: "",
          sellerIDInput: "",
-         remainingInput: ""
+         remainingInput: "",
+         ///////////////////
+         sellers: [],
+         addSellerIDInput: "",
+         addSellerNameInput: "",
+         addSellerRatingInput: "",
       }
    }
 
@@ -96,12 +101,29 @@ export default class App extends Component {
       this.setState({ remainingInput: event.target.value })
    }
 
+   onAddSellerIDChange = event => {
+      console.log("Updating the new seller id to ", event.target.value)
+      this.setState({ addSellerIDInput: event.target.value })
+   }
+
+   onAddSellerNameChange = event => {
+      console.log("Updating the new seller name to ", event.target.value)
+      this.setState({ addSellerNameInput: event.target.value })
+   }
+
+   onAddSellerRatingChange = event => {
+      console.log("Updating the new seller's rating to ", event.target.value)
+      this.setState({ addSellerRatingInput: event.target.value })
+   }
+
    //Render methods for all the Routes
 
    renderAllItems = () => {
       return (
          <div>
+
             <h2 className="center">Marketplace!</h2>
+
             <div className="center">
                Add an item to the Marketplace!
                <form onSubmit={this.onSubmitHandler}>
@@ -142,6 +164,34 @@ export default class App extends Component {
                      value={this.state.remainingInput}>
                   </input>
                   <input type="submit" value="Add item"></input>
+               </form>
+            </div>
+
+            <div className="center">
+               Add a seller to the Marketplace!
+               <form onSubmit={this.onSellerSubmitHandler}>
+
+                  <input
+                     type="input"
+                     placeholder="Seller ID"
+                     onChange={this.onAddSellerIDChange}
+                     value={this.state.addSellerIDInput}>
+                  </input>
+                  <input
+                     type="input"
+                     placeholder="Seller Name"
+                     onChange={this.onAddSellerNameChange}
+                     value={this.state.addSellerNameInput}>
+                  </input>
+                  <input
+                     type="input"
+                     placeholder="Rating"
+                     onChange={this.onAddSellerRatingChange}
+                     value={this.state.addSellerRatingInput}>
+                  </input>
+
+                  <input type="submit" value="Add Seller"></input>
+
                </form>
             </div>
 
