@@ -71,6 +71,23 @@ export default class App extends Component {
 
    }
 
+   onSellerSubmitHandler = event => {
+
+      event.preventDefault()
+
+      this.setState({
+         addSellerIDInput: "",
+         addSellerNameInput: "",
+         addSellerRatingInput: "",
+         sellers: this.state.sellers.concat({
+            id: this.state.addSellerIDInput,
+            name: this.state.addSellerNameInput,
+            rating: this.state.addSellerRatingInput
+         })
+      })
+
+   }
+
    onDescChange = event => {
       console.log("Updating the description to ", event.target.value)
       this.setState({ descInput: event.target.value })
@@ -229,6 +246,23 @@ export default class App extends Component {
 
    renderSeller = routerData => {
       let sellerId = routerData.match.params.sid
+
+      let addedSellerIds = this.state.sellers.map(seller => {
+         return seller.id
+      })
+
+      if (addedSellerIds.includes(sellerId)) {
+
+         let candidates =
+            this.state.sellers.filter(seller => { return seller.id === sellerId })
+
+         return (
+            <div>
+               <Seller seller={candidates[0]} sellerId={sellerId} addedItems={this.state.items} />
+            </div>
+         )
+      }
+
       let candidates =
          initialSellers.filter(seller => { return seller.id === sellerId })
       return (
@@ -296,7 +330,10 @@ export default class App extends Component {
          <div>
             <h2>Sellers + Items</h2>
             {initialSellers.map(seller => {
-               return <Seller seller={seller} sellerId={seller.id} />
+               return <Seller seller={seller} sellerId={seller.id} addedItems={this.state.items} />
+            })}
+            {this.state.sellers.map(seller => {
+               return <Seller seller={seller} sellerId={seller.id} addedItems={this.state.items} />
             })}
          </div>
       )
@@ -308,6 +345,13 @@ export default class App extends Component {
          <div>
             <h2>Sellers</h2>
             {initialSellers.map(seller => {
+               return (
+                  <div>
+                     <Link to={"/seller/" + seller.id}>{seller.name}</Link>
+                  </div>
+               )
+            })}
+            {this.state.sellers.map(seller => {
                return (
                   <div>
                      <Link to={"/seller/" + seller.id}>{seller.name}</Link>
