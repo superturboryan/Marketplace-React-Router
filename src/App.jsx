@@ -177,13 +177,23 @@ export default class App extends Component {
       let sellerId = routerData.match.params.sid
       let candidates =
          initialSellers.filter(seller => { return seller.id === sellerId })
-      return (<Seller seller={candidates[0]} sellerId={sellerId} />)
+      return (
+         <div>
+            <Seller seller={candidates[0]} sellerId={sellerId} />
+            <Link to={"/"}>Return to Marketplace</Link>
+         </div>
+      )
    }
 
    renderDetails = routerData => {
       let itemId = routerData.match.params.itemid
       let item = initialItems.filter(item => { return item.id === itemId })
-      return (<Details item={item[0]} />)
+      return (
+         <div>
+            <Details item={item[0]} />
+            <Link to={"/"}>Return to Marketplace</Link>
+         </div>
+      )
    }
 
    renderReviewer = routerData => {
@@ -207,6 +217,7 @@ export default class App extends Component {
                   return (<Review item={review[1]} rating={review[0].rating} comment={review[0].comment} reviewer={review[0].reviewer} showLink={false} />)
                })}
             </ul>
+            <Link to={"/"}>Return to Marketplace</Link>
          </div>
       )
    }
@@ -219,6 +230,7 @@ export default class App extends Component {
             {initialSellers.map(seller => {
                return <Seller seller={seller} sellerId={seller.id} />
             })}
+            <Link to={"/"}>Return to Marketplace</Link>
          </div>
       )
    }
@@ -229,7 +241,12 @@ export default class App extends Component {
          <div>
             <h2>Sellers</h2>
             {initialSellers.map(seller => {
-               return <div><Link to={"/seller/" + seller.id}>{seller.name}</Link></div>
+               return (
+                  <div>
+                     <Link to={"/seller/" + seller.id}>{seller.name}</Link>
+                     <Link to={"/"}>Return to Marketplace</Link>
+                  </div>
+               )
             })}
          </div>
       )
