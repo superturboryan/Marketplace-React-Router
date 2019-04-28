@@ -11,7 +11,7 @@ export default class Details extends Component {
          <div>
             <h2>{this.props.item.description}</h2>
             <img height="100px" src={this.props.item.image}></img>
-            Quantity remaining: {this.props.item.remaining}
+            <div>Quantity remaining: {this.props.item.remaining}</div>
             <div>
                <h4>Reviews:</h4>
                <ul>

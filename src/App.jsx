@@ -39,7 +39,7 @@ export default class App extends Component {
                <Route exact={true} path='/reviewer/:rid' render={this.renderReviewer} />
                <Route exact={true} path="/sellers" render={this.renderSellersList} />
                <Route exact={true} path="/allSellers" render={this.renderAllSellers} />
-               <Link className="center" to={"/"}>Return to Marketplace</Link>
+               <Link className="margin-v" to={"/"}>Return to Marketplace</Link>
             </div>
          </BrowserRouter>
       );
@@ -137,77 +137,78 @@ export default class App extends Component {
 
    renderAllItems = () => {
       return (
-         <div>
+         <div className="container center margin-v">
 
-            <h2 className="center">Marketplace!</h2>
+            <h2 className="center margin-v">Marketplace!</h2>
 
-            <div className="center">
+            <div className="center margin-v">
                Add an item to the Marketplace!
                <form onSubmit={this.onSubmitHandler}>
                   <input
-                     type="input"
+                     type="text"
                      placeholder="Description"
                      onChange={this.onDescChange}
-                     value={this.state.descInput}>
+                     value={this.state.descInput}
+                     className="descriptionInput">
                   </input>
                   <input
-                     type="input"
+                     type="text"
                      placeholder="Price"
                      onChange={this.onPriceChange}
                      value={this.state.priceInput}>
                   </input>
                   <input
-                     type="input"
+                     type="text"
                      placeholder="Image URL"
                      onChange={this.onImageChange}
                      value={this.state.imageInput}>
                   </input>
                   <input
-                     type="input"
+                     type="text"
                      placeholder="ItemID"
                      onChange={this.onItemIDChange}
                      value={this.state.itemIDInput}>
                   </input>
                   <input
-                     type="input"
+                     type="text"
                      placeholder="SellerID"
                      onChange={this.onSellerIDChange}
                      value={this.state.sellerIDInput}>
                   </input>
                   <input
-                     type="input"
+                     type="text"
                      placeholder="Remaining"
                      onChange={this.onRemaniningChange}
                      value={this.state.remainingInput}>
                   </input>
-                  <input type="submit" value="Add item"></input>
+                  <input className="myButton" type="submit" value="Add item"></input>
                </form>
             </div>
 
-            <div className="center">
+            <div className="center margin-v">
                Add a seller to the Marketplace!
                <form onSubmit={this.onSellerSubmitHandler}>
 
                   <input
-                     type="input"
+                     type="text"
                      placeholder="Seller ID"
                      onChange={this.onAddSellerIDChange}
                      value={this.state.addSellerIDInput}>
                   </input>
                   <input
-                     type="input"
+                     type="text"
                      placeholder="Seller Name"
                      onChange={this.onAddSellerNameChange}
                      value={this.state.addSellerNameInput}>
                   </input>
                   <input
-                     type="input"
+                     type="text"
                      placeholder="Rating"
                      onChange={this.onAddSellerRatingChange}
                      value={this.state.addSellerRatingInput}>
                   </input>
 
-                  <input type="submit" value="Add Seller"></input>
+                  <input className="myButton" type="submit" value="Add Seller"></input>
 
                </form>
             </div>
@@ -232,13 +233,11 @@ export default class App extends Component {
                   id={item.id}
                />))}
 
-            <div className="center">
-               <Link to={"/sellers"}>View all sellers</Link>
-            </div>
 
-            <div className="center">
-               <Link to={"/allSellers"}>View all sellers + items</Link>
-            </div>
+            <Link className="myButton automargin" to={"/sellers"}>View all sellers</Link>
+
+            <Link className="myButton automargin" to={"/allSellers"}>View all sellers + items</Link>
+
 
          </div>
       )
@@ -279,16 +278,21 @@ export default class App extends Component {
          return item.id
       })
       // console.log(addedIds)
-
+      // Check if the item to display is from the user added items
       if (addedIds.includes(itemId)) {
 
          let item = this.state.items.filter(item => { return item.id === itemId })
          return (
             <div>
                <Details item={item[0]} />
+               <form onSubmit={this.onSubmitReviewHandler}>
+                  <input
+                     type="text"
+                     placeholder="">
+                  </input>
+               </form>
             </div>
          )
-
       }
 
       let item = initialItems.filter(item => { return item.id === itemId })
@@ -329,12 +333,14 @@ export default class App extends Component {
       return (
          <div>
             <h2>Sellers + Items</h2>
-            {initialSellers.map(seller => {
-               return <Seller seller={seller} sellerId={seller.id} addedItems={this.state.items} />
-            })}
-            {this.state.sellers.map(seller => {
-               return <Seller seller={seller} sellerId={seller.id} addedItems={this.state.items} />
-            })}
+            <div className="margin-v">
+               {initialSellers.map(seller => {
+                  return <Seller seller={seller} sellerId={seller.id} addedItems={this.state.items} />
+               })}
+               {this.state.sellers.map(seller => {
+                  return <Seller seller={seller} sellerId={seller.id} addedItems={this.state.items} />
+               })}
+            </div>
          </div>
       )
    }
