@@ -51,12 +51,14 @@ body {
 /* Add some padding inside the card container */
 .container {
   padding: 20px;
+  border-radius: 50px;
 }
 
 .center {
   margin: auto;
   width: 50%;
   border: 3px solid darkblue;
+  border-radius: 15px;
   padding: 10px;
   background: rgba(255, 255, 255, 0.4)
 }

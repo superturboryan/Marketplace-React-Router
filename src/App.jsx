@@ -138,7 +138,6 @@ export default class App extends Component {
    renderAllItems = () => {
       return (
          <div className="container center margin-v">
-
             <h2 className="center margin-v">Marketplace!</h2>
 
             <div className="center margin-v">
@@ -184,11 +183,9 @@ export default class App extends Component {
                   <input className="myButton" type="submit" value="Add item"></input>
                </form>
             </div>
-
             <div className="center margin-v">
                Add a seller to the Marketplace!
                <form onSubmit={this.onSellerSubmitHandler}>
-
                   <input
                      type="text"
                      placeholder="Seller ID"
@@ -207,12 +204,9 @@ export default class App extends Component {
                      onChange={this.onAddSellerRatingChange}
                      value={this.state.addSellerRatingInput}>
                   </input>
-
                   <input className="myButton" type="submit" value="Add Seller"></input>
-
                </form>
             </div>
-
             {initialItems.map(item =>
                (<Item
                   cost={item.price}
@@ -222,7 +216,6 @@ export default class App extends Component {
                   remaining={item.remaining}
                   id={item.id}
                />))}
-
             {this.state.items.map(item =>
                (<Item
                   cost={item.price}
@@ -232,29 +225,20 @@ export default class App extends Component {
                   remaining={item.remaining}
                   id={item.id}
                />))}
-
-
             <Link className="myButton automargin" to={"/sellers"}>View all sellers</Link>
-
             <Link className="myButton automargin" to={"/allSellers"}>View all sellers + items</Link>
-
-
          </div>
       )
    }
 
    renderSeller = routerData => {
       let sellerId = routerData.match.params.sid
-
       let addedSellerIds = this.state.sellers.map(seller => {
          return seller.id
       })
-
       if (addedSellerIds.includes(sellerId)) {
-
          let candidates =
             this.state.sellers.filter(seller => { return seller.id === sellerId })
-
          return (
             <div>
                <Seller seller={candidates[0]} sellerId={sellerId} addedItems={this.state.items} />
@@ -306,9 +290,7 @@ export default class App extends Component {
    renderReviewer = routerData => {
       let reviewerName = routerData.match.params.rid
       let reviewsToDisplay = []
-
       initialItems.forEach(item => {
-
          item.reviews.forEach(review => {
             if (review.reviewer === reviewerName) {
                reviewsToDisplay.push([review, item])
@@ -346,7 +328,6 @@ export default class App extends Component {
    }
 
    renderSellersList = () => {
-
       return (
          <div>
             <h2>Sellers</h2>
